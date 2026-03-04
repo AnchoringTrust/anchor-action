@@ -1,11 +1,11 @@
-# umarise/anchor-action
+# AnchoringTrust/anchor-action
 
 Anchor build artifacts to Bitcoin. One line in your workflow.
 
 ## Usage
 
 ```yaml
-- uses: umarise/anchor-action@v1
+- uses: AnchoringTrust/anchor-action@v1
   with:
     file: build/output.tar.gz
   env:
@@ -63,7 +63,7 @@ jobs:
         run: tar czf build.tar.gz dist/
 
       - name: Anchor to Bitcoin
-        uses: umarise/anchor-action@v1
+        uses: AnchoringTrust/anchor-action@v1
         with:
           file: build.tar.gz
         env:

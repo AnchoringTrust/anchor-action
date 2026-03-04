@@ -1,5 +1,5 @@
 /**
- * umarise/anchor-action
+ * AnchoringTrust/anchor-action
  * 
  * Thin wrapper around @umarise/cli.
  * Installs the CLI, runs `umarise anchor <file>`, uploads the .proof artifact.
