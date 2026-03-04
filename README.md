@@ -1,6 +1,6 @@
 # AnchoringTrust/anchor-action
 
-Anchor build artifacts to Bitcoin. One line in your workflow.
+Anchor build artifacts to Bitcoin. One line in your workflow, zero manual proof handling.
 
 ## Usage
 
