@@ -1,0 +1,19 @@
+{
+  "name": "umarise-anchor-action",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GitHub Action — anchor files to Bitcoin via Umarise",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/index.js -o dist"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/artifact": "^2.2.2"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.1"
+  },
+  "license": "Unlicense"
+}
