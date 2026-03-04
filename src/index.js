@@ -7,7 +7,7 @@
 
 const core = require('@actions/core');
 const exec = require('@actions/exec');
-const artifact = require('@actions/artifact');
+const { DefaultArtifactClient } = require('@actions/artifact');
 const path = require('path');
 const fs = require('fs');
 
@@ -47,17 +47,9 @@ async function run() {
     // Upload .proof as artifact
     if (uploadArtifact && fs.existsSync(proofPath)) {
       core.info('Uploading .proof artifact...');
-      const artifactClient = artifact.default || artifact;
       const artifactName = `${path.basename(file)}.proof`;
-
-      // @actions/artifact v2 API
-      if (typeof artifactClient.uploadArtifact === 'function') {
-        await artifactClient.uploadArtifact(artifactName, [proofPath], path.dirname(proofPath));
-      } else {
-        const client = new artifactClient.DefaultArtifactClient();
-        await client.uploadArtifact(artifactName, [proofPath], path.dirname(proofPath));
-      }
-
+      const client = new DefaultArtifactClient();
+      await client.uploadArtifact(artifactName, [proofPath], path.dirname(proofPath));
       core.info(`✓ artifact uploaded: ${artifactName}`);
     }
 
