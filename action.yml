@@ -1,0 +1,28 @@
+name: 'Umarise Anchor'
+description: 'Anchor files to Bitcoin via Umarise. Creates a .proof bundle for every build artifact.'
+author: 'Umarise'
+
+branding:
+  icon: 'shield'
+  color: 'gray-dark'
+
+inputs:
+  file:
+    description: 'Path to the file to anchor (e.g. build/output.tar.gz)'
+    required: true
+  upload-artifact:
+    description: 'Upload the .proof file as a GitHub Actions artifact (default: true)'
+    required: false
+    default: 'true'
+
+outputs:
+  origin-id:
+    description: 'The origin_id returned by Umarise'
+  hash:
+    description: 'The SHA-256 hash of the anchored file'
+  proof-path:
+    description: 'Path to the generated .proof file'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
