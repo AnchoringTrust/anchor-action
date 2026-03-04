@@ -26,10 +26,10 @@ async function run() {
     core.info('Installing @umarise/cli...');
     await exec.exec('npm', ['install', '-g', '@umarise/cli']);
 
-    // Run anchor command
+    // Run proof command (full lifecycle: anchor + resolve + download)
     core.info(`Anchoring ${file}...`);
     let stdout = '';
-    await exec.exec('umarise', ['anchor', file], {
+    await exec.exec('umarise', ['proof', file], {
       listeners: {
         stdout: (data) => { stdout += data.toString(); },
       },
