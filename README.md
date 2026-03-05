@@ -1,6 +1,6 @@
 # AnchoringTrust/anchor-action
 
-Anchor build artifacts to Bitcoin. One line in your workflow, zero manual proof handling.
+Anchor build artifacts to Bitcoin. One line in your workflow.
 
 ## Usage
 
@@ -17,7 +17,7 @@ That's it. Every build gets a `.proof` file — uploaded as a GitHub Actions art
 ## What happens
 
 1. Installs `@umarise/cli`
-2. Runs `umarise proof <file>` (full lifecycle: anchor → resolve → download proof)
+2. Runs `umarise anchor <file>`
 3. Uploads `<file>.proof` as artifact
 
 The proof bundle contains `certificate.json` + `proof.ots`. Verifiable offline, independent of Umarise.
@@ -84,4 +84,3 @@ No Umarise server needed for verification.
 ## License
 
 Unlicense (Public Domain)
-
