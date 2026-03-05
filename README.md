@@ -1,6 +1,10 @@
 # AnchoringTrust/anchor-action
 
-Anchor build artifacts to Bitcoin. One line in your workflow, zero manual proof handling.
+Anchor build artifacts to Bitcoin. One line in your workflow.
+
+```
+artifact → artifact.proof
+```
 
 ## Usage
 
@@ -14,35 +18,27 @@ Anchor build artifacts to Bitcoin. One line in your workflow, zero manual proof 
 
 That's it. Every build gets a `.proof` file — uploaded as a GitHub Actions artifact.
 
-## What happens
+## What it does
 
-1. Installs `@umarise/cli`
-2. Runs `umarise proof <file>` (full lifecycle: anchor → resolve → download proof)
-3. Uploads `<file>.proof` as artifact
+1. Hashes your file locally (SHA-256, bytes never leave your runner)
+2. Anchors the hash to Bitcoin via Umarise Core API
+3. Downloads the `.proof` bundle (certificate + OTS proof)
+4. Uploads `<file>.proof` as a build artifact
 
-The proof bundle contains `certificate.json` + `proof.ots`. Verifiable offline, independent of Umarise.
+The proof is independently verifiable. No Umarise account needed to verify.
 
-## Inputs
+## Example: anchored releases
 
-| Input | Required | Default | Description |
-|---|---|---|---|
-| `file` | ✅ | — | Path to the file to anchor |
-| `upload-artifact` | — | `true` | Upload `.proof` as GitHub Actions artifact |
+Your GitHub release will look like:
 
-## Outputs
+```
+v1.2.0
 
-| Output | Description |
-|---|---|
-| `origin-id` | The `origin_id` from Umarise |
-| `hash` | SHA-256 hash of the file |
-| `proof-path` | Local path to the `.proof` file |
+release.tar.gz
+release.tar.gz.proof
+```
 
-## Secrets
-
-Add `UMARISE_API_KEY` to your repository secrets:
-Settings → Secrets and variables → Actions → New repository secret.
-
-Get your key at [umarise.com/developers](https://umarise.com/developers).
+Anyone can verify: `what is this .proof file?` → that's your marketing.
 
 ## Full example
 
@@ -70,18 +66,46 @@ jobs:
           UMARISE_API_KEY: ${{ secrets.UMARISE_API_KEY }}
 ```
 
+## Inputs
+
+| Input | Required | Default | Description |
+|---|---|---|---|
+| `file` | ✅ | — | Path to the file to anchor |
+| `upload-artifact` | — | `true` | Upload `.proof` as build artifact |
+
+## Outputs
+
+| Output | Description |
+|---|---|
+| `origin-id` | The origin ID from Umarise |
+| `hash` | SHA-256 hash of the file |
+| `proof-path` | Local path to the `.proof` file |
+
+## Setup
+
+1. Get an API key at [umarise.com/developers](https://umarise.com/developers)
+2. Add `UMARISE_API_KEY` to your repo secrets (Settings → Secrets → Actions)
+3. Add the step to your workflow
+4. Push. Done.
+
 ## Verify offline
 
 ```bash
-# Download the .proof artifact from GitHub Actions
 unzip build.tar.gz.proof
 sha256sum build.tar.gz              # compare with certificate.json
-ots verify proof.ots                # verify against Bitcoin
+ots verify proof.ots                # verify against Bitcoin blockchain
 ```
 
-No Umarise server needed for verification.
+Or use [verify-anchoring.org](https://verify-anchoring.org) — independent, client-side, no upload.
+
+## Links
+
+- [Get API key](https://umarise.com/developers)
+- [CLI](https://www.npmjs.com/package/@umarise/cli) — `npx @umarise/cli anchor <file>`
+- [Node.js SDK](https://www.npmjs.com/package/@umarise/anchor)
+- [Python SDK](https://pypi.org/project/umarise-core-sdk/)
+- [Anchoring Specification](https://anchoring-spec.org)
 
 ## License
 
 Unlicense (Public Domain)
-
