@@ -1,3 +1,5 @@
+[![Anchored by Umarise](https://img.shields.io/badge/anchored-Bitcoin-c49a6c?style=flat)](https://umarise.com)
+
 # AnchoringTrust/anchor-action
 
 Anchor build artifacts to Bitcoin. One line in your workflow.
