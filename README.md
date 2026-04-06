@@ -70,6 +70,23 @@ jobs:
 
 ## Inputs
 
+> ⚠️ **Common mistake: do NOT use `tar czf build.tar.gz .`**
+>
+> When archiving the current directory (`.`), `tar czf` includes the output file
+> in the archive, causing a recursive error. Use the two-step deterministic flow instead:
+>
+> ```yaml
+> - name: Create deterministic build artifact
+>   run: |
+>     tar --sort=name --mtime='UTC 1970-01-01' \
+>         --owner=0 --group=0 --numeric-owner \
+>         -cf build.tar .
+>     gzip -n -f build.tar
+> ```
+>
+> Archiving a **subdirectory** (e.g. `tar czf build.tar.gz dist/`) is fine — the
+> output file is outside the archived path.
+
 | Input | Required | Default | Description |
 |---|---|---|---|
 | `file` | ✅ | — | Path to the file to anchor |
