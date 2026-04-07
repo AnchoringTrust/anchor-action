@@ -170,6 +170,21 @@ A `.proof` file next to a `.sig` and `.sbom` completes the audit trail.
 
 ---
 
+## Troubleshooting
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| `Error: UMARISE_API_KEY not set` | Secret name typo or missing | Check Settings → Secrets → Actions. Name must be exactly `UMARISE_API_KEY` (case-sensitive) |
+| `401 Unauthorized` | Invalid or revoked API key | Generate a new key at [umarise.com/developers](https://umarise.com/developers) and update the secret |
+| `402 Credit balance exhausted` | 100 free sandbox anchors used up | Upgrade to production (€1/1,000 anchors) at [umarise.com/developers](https://umarise.com/developers) |
+| Workflow not triggering | Default branch is not `main` | Rename branch (Settings → General → Default branch) or change `branches: [main]` in the YAML |
+| `tar: .: file changed as we read it` | Files modified during snapshot | Safe to ignore — does not affect the hash |
+| No artifact uploaded | `upload-artifact` set to `false` | Remove or set `upload-artifact: true` |
+
+> 💡 **Still stuck?** Open an issue at [github.com/AnchoringTrust/anchor-action](https://github.com/AnchoringTrust/anchor-action/issues) or email support@umarise.com.
+
+---
+
 ## Links
 
 - [Get API key](https://umarise.com/developers)
