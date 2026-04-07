@@ -1,10 +1,10 @@
 name: 'Umarise Anchor'
-description: 'Anchor files to Bitcoin via Umarise. Creates a .proof bundle for every build artifact.'
+description: 'Anchor build artifacts to Bitcoin. Tamper-proof timestamps for releases, binaries, ML models, and compliance artifacts. Privacy-first: only the SHA-256 hash leaves your runner.'
 author: 'Umarise'
 
 branding:
-  icon: 'shield'
-  color: 'gray-dark'
+  icon: 'lock'
+  color: 'orange'
 
 inputs:
   file:
