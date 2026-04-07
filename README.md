@@ -51,7 +51,7 @@ That's it. **25 lines. No SDK. No dependency. No code change.**
 
 Every push to `main` now produces a `.proof` file — uploaded as a GitHub Actions artifact.
 
-> ✅ Last tested: April 6, 2025 — 100% working.
+> ✅ Last tested: April 7, 2026 — 100% working.
 
 ---
 
@@ -109,6 +109,12 @@ ots verify proof.ots          # verify against Bitcoin
 | `upload-artifact` | — | `true` | Upload `.proof` as build artifact |
 
 **Authentication:** Set `UMARISE_API_KEY` as a repository secret (Settings → Secrets → Actions).
+
+> 💡 **Tip: One key, multiple repos.** Your API key is not repo-specific. Use the same key across all your repositories to keep all anchors under one account and avoid wasting your 100 free sandbox anchors.
+
+> 💡 **Tip: Naming the workflow file.** When creating the file on GitHub (Add file → Create new file), type the full path `.github/workflows/anchor.yml` in the filename field — GitHub creates the folders automatically. Any `.yml` file in `.github/workflows/` is recognized as a workflow.
+
+> ⚠️ **Default branch must be `main`.** The workflow triggers on `branches: [main]`. If your repository uses a different default branch name (e.g. `master`, `develop`), either rename it (Settings → General → Default branch) or change `branches: [main]` in the YAML to match.
 
 ---
 
