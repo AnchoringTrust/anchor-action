@@ -4,10 +4,10 @@
 
 **Prove when your code existed. One YAML file. Bitcoin-verified.**
 
-Every `git push` â†’ your entire repository is snapshotted, hashed, and anchored to Bitcoin. The proof is independently verifiable by anyone, forever, without trusting Umarise.
+Every `git push` → your entire repository is snapshotted, hashed, and anchored to Bitcoin. The proof is independently verifiable by anyone, forever, without trusting Umarise.
 
 ```
-push â†’ snapshot â†’ SHA-256 hash â†’ Bitcoin anchor â†’ .proof artifact
+push → snapshot → SHA-256 hash → Bitcoin anchor → .proof artifact
 ```
 
 > Your source code never leaves the runner. Only the hash is sent.
@@ -49,9 +49,9 @@ jobs:
 
 That's it. **25 lines. No SDK. No dependency. No code change.**
 
-Every push to `main` now produces a `.proof` file â€” uploaded as a GitHub Actions artifact.
+Every push to `main` now produces a `.proof` file — uploaded as a GitHub Actions artifact.
 
-> âœ… Last tested: April 6, 2025 â€” 100% working.
+> ✅ Last tested: April 6, 2025 — 100% working.
 
 ---
 
@@ -75,7 +75,7 @@ Every push to `main` now produces a `.proof` file â€” uploaded as a GitHub 
 
 The `tar` command uses fixed timestamps, sort order, and ownership to ensure the **same code always produces the same hash**. Without this, identical code would produce different hashes on different runs.
 
-> âš ï¸ Do **not** use `tar czf build.tar.gz .` â€” this produces non-deterministic archives and inconsistent hashes.
+> ⚠️ Do **not** use `tar czf build.tar.gz .` — this produces non-deterministic archives and inconsistent hashes.
 
 ---
 
@@ -86,7 +86,7 @@ No account needed. No trust required.
 ```bash
 pip install umarise
 umarise verify build.tar.gz.proof
-# âœ“ Hash match | Bitcoin Block #939611 | 2026-03-06 | VALID
+# ✓ Hash match | Bitcoin Block #939611 | 2026-03-06 | VALID
 ```
 
 Or drag-and-drop at [verify-anchoring.org](https://verify-anchoring.org).
@@ -105,10 +105,10 @@ ots verify proof.ots          # verify against Bitcoin
 
 | Input | Required | Default | Description |
 |---|---|---|---|
-| `file` | âœ… | â€” | Path to the file to anchor |
-| `upload-artifact` | â€” | `true` | Upload `.proof` as build artifact |
+| `file` | ✅ | — | Path to the file to anchor |
+| `upload-artifact` | — | `true` | Upload `.proof` as build artifact |
 
-**Authentication:** Set `UMARISE_API_KEY` as a repository secret (Settings â†’ Secrets â†’ Actions).
+**Authentication:** Set `UMARISE_API_KEY` as a repository secret (Settings → Secrets → Actions).
 
 ---
 
@@ -127,7 +127,7 @@ ots verify proof.ots          # verify against Bitcoin
 | Tier | Price | Includes |
 |------|-------|---------|
 | **Developer sandbox** | Free | 100 anchors, no credit card |
-| **Production** | â‚¬1 per 1,000 anchors | Pay-as-you-go via Stripe |
+| **Production** | €1 per 1,000 anchors | Pay-as-you-go via Stripe |
 
 Get your free API key at [umarise.com/developers](https://umarise.com/developers).
 
@@ -137,8 +137,8 @@ Get your free API key at [umarise.com/developers](https://umarise.com/developers
 
 Your `.proof` files are uploaded as GitHub Actions artifacts (90-day retention by default). For long-term storage:
 
-- **Commit proofs to your repo** in a `proofs/` directory â€” they become part of your git history
-- **Keep the original artifact** (build.tar.gz) alongside its `.proof` â€” you need both to verify
+- **Commit proofs to your repo** in a `proofs/` directory — they become part of your git history
+- **Keep the original artifact** (build.tar.gz) alongside its `.proof` — you need both to verify
 - **Backup to external storage** (S3, GCS, etc.) for audit-critical proofs
 
 ---
@@ -148,7 +148,7 @@ Your `.proof` files are uploaded as GitHub Actions artifacts (90-day retention b
 Code signing proves **who**. SBOMs prove **what**. Anchoring proves **when**.
 
 ```
-build â†’ test â†’ deploy â†’ anchor
+build → test → deploy → anchor
 ```
 
 A `.proof` file next to a `.sig` and `.sbom` completes the audit trail.
@@ -158,7 +158,7 @@ A `.proof` file next to a `.sig` and `.sbom` completes the audit trail.
 ## Setup
 
 1. Get an API key at [umarise.com/developers](https://umarise.com/developers) (100 free anchors, no credit card)
-2. Add `UMARISE_API_KEY` to your repo secrets (Settings â†’ Secrets â†’ Actions)
+2. Add `UMARISE_API_KEY` to your repo secrets (Settings → Secrets → Actions)
 3. Copy the YAML above to `.github/workflows/anchor.yml`
 4. Push. Done.
 
